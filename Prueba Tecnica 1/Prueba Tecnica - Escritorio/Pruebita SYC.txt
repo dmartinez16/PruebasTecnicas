@@ -1,0 +1,43 @@
+CLIENTES ---------
+
+INSERT INTO CLIENTES (NOMBRE,DIRECCION) VALUES ('Adrian Dargelos','Buenos Aires - Berazategui. Av. 14 entre 131 y 131A. Hospital Gandulfo')
+INSERT INTO CLIENTES (NOMBRE,DIRECCION) VALUES ('David Gahan','Bogota CALLE 72#10-07')
+INSERT INTO CLIENTES (NOMBRE,DIRECCION) VALUES ('Dilan Martinez','Bucaramanga - Barrio Bucarica Bloque 15-1 APTO 302 Sector 9')
+
+
+ESTADO_FACTURA-------------------
+
+INSERT INTO ESTADO_FACTURA (DESCRIPCION) VALUES ('VIGENTE')
+INSERT INTO ESTADO_FACTURA (DESCRIPCION) VALUES ('PAGADA')
+INSERT INTO ESTADO_FACTURA (DESCRIPCION) VALUES ('VENCIDA')
+
+
+FACTURA --------------------
+
+INSERT INTO FACTURA (NUME_DOC,CODI_ESTADO,VALOR_FAC,FECHA_FAC) VALUES ('1','1','600000',(convert(datetime,'18-06-12 10:34:09 AM',5)))
+INSERT INTO FACTURA (NUME_DOC,CODI_ESTADO,VALOR_FAC,FECHA_FAC) VALUES ('1','3','8000000',(convert(datetime,'18-06-12 12:34:09 PM',5)))
+INSERT INTO FACTURA (NUME_DOC,CODI_ESTADO,VALOR_FAC,FECHA_FAC) VALUES ('3','2','400000',(convert(datetime,'18-12-22 09:00:09 AM',5)))
+
+Consulta prueba para mostrar como aparece en el word
+
+SELECT f.FECHA_FAC as Fecha_Factura, c.NOMBRE as Cliente, f.VALOR_FAC as Valor_Factura , e.DESCRIPCION as Descripcion
+FROM CLIENTES c join FACTURA f ON c.NUME_DOC = f.NUME_DOC
+	 join ESTADOS_FACTURA e ON e.CODI_ESTADO = f.CODI_ESTADO; 
+
+Reporte de consulta de la sumatoria del valor de las facturas por cliente de acuerdo con el estado de pago-----------------------------
+
+SELECT sum(f.VALOR_FAC) as Valor_Sumatoria , c.NOMBRE as Cliente, e.Descripcion as Estado_Factura
+FROM CLIENTES c join FACTURA f ON c.NUME_DOC = f.NUME_DOC
+	 join ESTADOS_FACTURA e ON e.CODI_ESTADO = f.CODI_ESTADO
+WHERE f.NUME_DOC = 1 AND f.CODI_ESTADO = 1
+GROUP BY c.NOMBRE,e.DESCRIPCION;
+
+
+
+
+
+
+
+
+
+
